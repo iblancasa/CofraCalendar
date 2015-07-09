@@ -1,0 +1,36 @@
+{
+    "0": {
+        "title": "NOMBRE DE LA CONVOCATORIA",
+        "description": "DESCRIPCIÓN DEL LA CONVOCATORIA",,
+        "kind": "TIPO",
+        "price": 10.5,
+        "date": {
+            "hour": 10,
+            "min": 59,
+            "day": 15,
+            "month": 10,
+            "year": 2015
+        },
+        "coordinates": {
+            "latitude": 30.3,
+            "longitude": 40
+        }
+    },
+    "1": {
+        "title": "NOMBRE DE LA CONVOCATORIA",
+        "description": "DESCRIPCIÓN DEL LA CONVOCATORIA",
+        "kind": "TIPO",
+        "price": 10.5,
+        "date": {
+            "hour": 10,
+            "min": 59,
+            "day": 15,
+            "month": 10,
+            "year": 2015
+        },
+        "coordinates": {
+            "latitude": 30.3,
+            "longitude": 40
+        }
+    }
+}
