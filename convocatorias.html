@@ -1,0 +1,86 @@
+<!doctype>
+<html>
+  <head>
+      <meta charset="utf-8"/>
+      <title> Crear convocatorias </title>
+      <style>
+        thead{
+           font-weight: bold;
+        }
+      </style>
+  </head>
+  <body>
+
+    <form id="formulario" >
+    <fieldset>
+        <legend>Insertar</legend>
+            <label for="title">Título </label><br>
+            <input id="title" placeholder="Título" size="35"/><br>
+
+            <label for="description">Descripción</label><br>
+            <textarea id="description" rows="10" cols="100" placeholder="Descripción"></textarea><br>
+
+            <label for="date">Fecha y hora</label><br>
+            <input type="date" name="bdaytime"><br>
+
+            <label for="kind">Tipo</label><br>
+            <input id="kind" placeholder="Tipo" size="35"/><br>
+
+            <label for="price">Precio</label><br>
+            <input id="price" placeholder="Precio" size="35"/><br>
+
+           <br><br>
+           <label >Coordenadas</label><br>
+           <input id="latitude"/><br>
+           <input id="longitude"/><br>
+
+              <input id="crear" type="submit" value="Crear" />
+        </fieldset>
+    </form>
+
+    <table id="convocatoriasEnJSON" border='1'>
+      <thead>
+        <td>Título</td><td>Descripción</td>
+        <td>Precio</td><td>Latitud</td>
+        <td>Longitud</td><td>Tipo</td>
+        <td>Hora</td><td>Minuto</td>
+        <td>Día</td><td>Mes</td><td>Año</td>
+        <td>Borrar</td>
+      </thead>
+    </table>
+<br>
+    <input type="submit" id="generate" value="Generar"><br><br>
+
+
+  <textarea id="jsonSalida" rows="100" cols="120"></textarea><br>
+  </body>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script>
+    var convocatorias;
+
+    $.getJSON( "http://iblancasa.com/CofraCalendar/convocatorias.json", function( data ) {
+
+       convocatorias=data;
+
+       var trHTML = '';
+       $.each(data, function (i, item) {
+            trHTML += '<tr><td>' + item.convocatorias.title + '</td><td>' + item.convocatorias.description + '</td><td>' + item.convocatorias.price + '</td>'+
+            '<td>'+item.convocatorias.coordinates.latitude+'</td><td>'+item.convocatorias.coordinates.longitude+'</td><td>'+item.convocatorias.kind+'</td>'+
+            '<td>'+item.convocatorias.date.hour+'</td><td>'+item.convocatorias.date.min+'</td><td>'+item.convocatorias.date.day+'</td>'+
+            '<td>'+item.convocatorias.date.month+'</td><td>'+item.convocatorias.date.year+'</td><td><a href="#'+i+'">X</a></td> </tr>';
+        });
+        $('#convocatoriasEnJSON').append(trHTML);
+
+      });
+
+      
+      $('#generate').click(function(){
+        convocatorias.push(
+
+        );
+      });
+
+
+
+  </script>
+</html>
