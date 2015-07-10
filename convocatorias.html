@@ -58,8 +58,6 @@
       </thead>
     </table>
 
-
-
 <br>
     <a href="#jsonSalida" id="generate">Generar JSON</a><br><br>
 
@@ -99,12 +97,22 @@
 
         var trHTML = '';
         $.each(convocatorias.convocatorias, function (i, item) {//Listar convocatorias en tabla
-             trHTML += '<tr class="generated"><td>' + item.title + '</td><td>' + item.description + '</td><td>' + item.price + '</td>'+
+             trHTML += '<tr id="'+i+'" class="generated"><td>' + item.title + '</td><td>' + item.description + '</td><td>' + item.price + '</td>'+
              '<td>'+item.coordinates.latitude+'</td><td>'+item.coordinates.longitude+'</td><td>'+item.kind+'</td>'+
              '<td>'+item.time+'</td><td>'+item.date+'</td><td>'+item.address+'</td><td>'+item.img+'</td>'+
-             '<td><a href="#'+i+'">X</a></td> </tr>';
+             '<td><a class="borrador" href="#'+i+'">X</a></td> </tr>';
+
+             console.log(convocatorias.convocatorias);
+
          });
          $('#convocatoriasEnJSON').append(trHTML);
+
+
+         $(".borrador").click(function(){
+           var id = $(this).attr("href");
+            $(id).remove();
+            console.log(parseInt(id.substring(1,id.length)));
+         });
        }
 
 
