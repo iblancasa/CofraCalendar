@@ -11,6 +11,7 @@
   </head>
   <body>
 
+<a href="#" id ="ver" >Ver todo</a>
     <form id="formulario" >
     <fieldset>
         <legend>Insertar</legend>
@@ -73,7 +74,24 @@
 
     $.getJSON( "http://iblancasa.com/CofraCalendar/convocatorias.json", function( data ) {//Tomar convocatorias antiguas
        convocatorias=data;
-       pintaTabla();
+
+
+       var convo;
+       var aux = [];
+
+       for(var i = 0; convocatorias.convocatorias.length > i ; i++){
+         convo = convocatorias.convocatorias[i];
+         if(new Date(convo.date+" "+convo.time).getTime() > new Date().getTime() ){
+            aux.push(convocatorias.convocatorias[i]);
+        }
+      };
+      convocatorias.convocatorias = aux;
+      convocatorias.convocatorias = convocatorias.convocatorias.sort(function(a, b) {
+         return new Date(a.date+" "+a.time).getTime() - new Date(b.date+" "+b.time).getTime()
+      });
+
+      pintaTabla();
+
      });
 
 
@@ -88,7 +106,17 @@
          $('#convocatoriasEnJSON').append(trHTML);
        }
 
+
+
+
+
       $('#crear').click(function(){//Para crear una nueva convocatoria
+
+        if(new Date($('#date').val()).getTime()  < new Date().getTime()){
+          alert('ES DEMASIADO ANTIGUO');
+          return;
+        }
+
         convocatorias.convocatorias.push(
           {
               "title": $('#title').val(),
