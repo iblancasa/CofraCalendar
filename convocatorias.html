@@ -43,7 +43,7 @@
            <input id="latitude"/><br>
            <input id="longitude"/><br>
 
-              <a href="#" id="crear">Crear</a>
+              <a href="#convocatoriasEnJSON" id="crear">Crear</a>
         </fieldset>
     </form>
 
@@ -73,18 +73,20 @@
 
     $.getJSON( "http://iblancasa.com/CofraCalendar/convocatorias.json", function( data ) {//Tomar convocatorias antiguas
        convocatorias=data;
-
-       var trHTML = '';
-       $.each(convocatorias.convocatorias, function (i, item) {//Listar convocatorias en tabla
-            trHTML += '<tr><td>' + item.title + '</td><td>' + item.description + '</td><td>' + item.price + '</td>'+
-            '<td>'+item.coordinates.latitude+'</td><td>'+item.coordinates.longitude+'</td><td>'+item.kind+'</td>'+
-            '<td>'+item.time+'</td><td>'+item.date+'</td><td>'+item.address+'</td><td>'+item.img+'</td>'+
-            '<td><a href="#'+i+'">X</a></td> </tr>';
-        });
-        $('#convocatoriasEnJSON').append(trHTML);
-      });
+       pintaTabla();
+     });
 
 
+      function pintaTabla(){
+        var trHTML = '';
+        $.each(convocatorias.convocatorias, function (i, item) {//Listar convocatorias en tabla
+             trHTML += '<tr><td>' + item.title + '</td><td>' + item.description + '</td><td>' + item.price + '</td>'+
+             '<td>'+item.coordinates.latitude+'</td><td>'+item.coordinates.longitude+'</td><td>'+item.kind+'</td>'+
+             '<td>'+item.time+'</td><td>'+item.date+'</td><td>'+item.address+'</td><td>'+item.img+'</td>'+
+             '<td><a href="#'+i+'">X</a></td> </tr>';
+         });
+         $('#convocatoriasEnJSON').append(trHTML);
+       }
 
       $('#crear').click(function(){//Para crear una nueva convocatoria
         convocatorias.convocatorias.push(
@@ -103,6 +105,12 @@
               }
           }
         );
+
+        convocatorias.convocatorias = convocatorias.convocatorias.sort(function(a, b) {
+           return new Date(a.date+" "+a.time).getTime() - new Date(b.date+" "+b.time).getTime()
+        });
+
+        pintaTabla();
       }
       );
 
