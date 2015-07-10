@@ -15,13 +15,16 @@
     <fieldset>
         <legend>Insertar</legend>
             <label for="title">Título </label><br>
-            <input id="title" placeholder="Título" size="35"/><br>
+            <input id="title" placeholder="Título" size="70"/><br>
 
             <label for="description">Descripción</label><br>
             <textarea id="description" rows="10" cols="100" placeholder="Descripción"></textarea><br>
 
-            <label for="date">Fecha y hora</label><br>
-            <input type="date" name="bdaytime"><br>
+            <label for="date">Fecha</label><br>
+            <input type="date" id="date"><br>
+
+            <label for="time">Hora</label><br>
+            <input type="time" id="time"><br>
 
             <label for="kind">Tipo</label><br>
             <input id="kind" placeholder="Tipo" size="35"/><br>
@@ -29,12 +32,18 @@
             <label for="price">Precio</label><br>
             <input id="price" placeholder="Precio" size="35"/><br>
 
+            <label for="image">Imagen </label><br>
+            <input id="image" placeholder="URL imagen" size="70"/><br>
+
+            <label for="address">Dirección </label><br>
+            <input id="address" placeholder="Dirección" size="70"/><br>
+
            <br><br>
            <label >Coordenadas</label><br>
            <input id="latitude"/><br>
            <input id="longitude"/><br>
 
-              <input id="crear" type="submit" value="Crear" />
+              <a href="#" id="crear">Crear</a>
         </fieldset>
     </form>
 
@@ -43,44 +52,64 @@
         <td>Título</td><td>Descripción</td>
         <td>Precio</td><td>Latitud</td>
         <td>Longitud</td><td>Tipo</td>
-        <td>Hora</td><td>Minuto</td>
-        <td>Día</td><td>Mes</td><td>Año</td>
+        <td>Hora</td><td>Fecha</td>
+        <td>Dirección</td><td>Imagen</td>
         <td>Borrar</td>
       </thead>
     </table>
+
+
+
 <br>
-    <input type="submit" id="generate" value="Generar"><br><br>
+    <a href="#jsonSalida" id="generate">Generar JSON</a><br><br>
 
 
-  <textarea id="jsonSalida" rows="100" cols="120"></textarea><br>
+  <textarea id="jsonSalida" readonly rows="100" cols="120"></textarea><br>
   </body>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script>
-    var convocatorias;
+    var convocatorias;//Todas las convocatorias
 
-    $.getJSON( "http://iblancasa.com/CofraCalendar/convocatorias.json", function( data ) {
 
+    $.getJSON( "http://iblancasa.com/CofraCalendar/convocatorias.json", function( data ) {//Tomar convocatorias antiguas
        convocatorias=data;
 
        var trHTML = '';
-       $.each(data, function (i, item) {
-            trHTML += '<tr><td>' + item.convocatorias.title + '</td><td>' + item.convocatorias.description + '</td><td>' + item.convocatorias.price + '</td>'+
-            '<td>'+item.convocatorias.coordinates.latitude+'</td><td>'+item.convocatorias.coordinates.longitude+'</td><td>'+item.convocatorias.kind+'</td>'+
-            '<td>'+item.convocatorias.date.hour+'</td><td>'+item.convocatorias.date.min+'</td><td>'+item.convocatorias.date.day+'</td>'+
-            '<td>'+item.convocatorias.date.month+'</td><td>'+item.convocatorias.date.year+'</td><td><a href="#'+i+'">X</a></td> </tr>';
+       $.each(convocatorias.convocatorias, function (i, item) {//Listar convocatorias en tabla
+            trHTML += '<tr><td>' + item.title + '</td><td>' + item.description + '</td><td>' + item.price + '</td>'+
+            '<td>'+item.coordinates.latitude+'</td><td>'+item.coordinates.longitude+'</td><td>'+item.kind+'</td>'+
+            '<td>'+item.time+'</td><td>'+item.date+'</td><td>'+item.address+'</td><td>'+item.img+'</td>'+
+            '<td><a href="#'+i+'">X</a></td> </tr>';
         });
         $('#convocatoriasEnJSON').append(trHTML);
-
       });
 
-      
-      $('#generate').click(function(){
-        convocatorias.push(
 
+
+      $('#crear').click(function(){//Para crear una nueva convocatoria
+        convocatorias.convocatorias.push(
+          {
+              "title": $('#title').val(),
+              "description":  $('#description').val(),
+              "kind": $('#kind').val(),
+              "price": $('#price').val(),
+              "img": $('#image').val(),
+              "date": $('#date').val(),
+              "time": $('#time').val(),
+              "address": $('#address').val(),
+              "coordinates": {
+                  "latitude":  $('#latitude').val(),
+                  "longitude": $('#longitude').val()
+              }
+          }
         );
+      }
+      );
+
+
+      $('#generate').click(function(){
+        $('#jsonSalida').val(JSON.stringify(convocatorias, null, 2));
       });
-
-
 
   </script>
 </html>
