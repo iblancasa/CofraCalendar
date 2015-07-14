@@ -3,10 +3,10 @@
         {
             "title": "NOMBRE DE LA CONVOCATORIA",
             "description": "DESCRIPCIÃN DEL LA CONVOCATORIA",
-            "kind": "TIPO",
+            "kind": "test.png",
             "price": 10.5,
             "img": "URL",
-            "date": "2015-07-02",
+            "date": "2015-11-02",
             "time": "08:02",
             "address": "C/ Boquerón",
             "coordinates": {
@@ -19,8 +19,8 @@
             "description": "DESCRIPCIÃN DEL LA CONVOCATORIA",
             "kind": "TIPO",
             "price": 10.5,
-            "img": "URL",
-            "date": "2015-07-02",
+            "img": "test.png",
+            "date": "2015-11-02",
             "time": "08:02",
             "address": "C/ Boquerón",
             "coordinates": {

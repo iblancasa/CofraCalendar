@@ -5,11 +5,14 @@ chai.use(require('chai-json-schema'));//JSON
 chai.use(require('chai-fs'));//FS
 chai.use(require('chai-things'));//Things
 chai.use(require('chai-http'));//HTTP
+chai.use(require('chai-datetime'));//Time
 
 var fs = require('fs');
 
 var datos;
 var schema;
+var URL = 'http://iblancasa.com/CofraCalendar/';
+
 
 describe('Lectura de ficheros', function () {
 
@@ -114,5 +117,38 @@ describe('Comprobando que están propiedades del fichero convocatorias', functio
 		datos.convocatorias.should.all.have.property('coordinates')
 		done();
 	});
+
+});
+
+
+
+describe('Comprobando que los datos estén bien', function () {
+		it('Las fechas de los eventos son en el futuro', function (done) {
+					var actual = new Date();
+					var fecha;
+					var fecha_arr=[];
+
+					for(i = 0; i< datos.convocatorias.length; i++){
+						fecha_arr = datos.convocatorias[i].date.split("-");
+						fecha = new Date(fecha_arr[0],fecha_arr[1],fecha_arr[2]);
+
+						expect(actual).to.beforeDate(fecha);
+					}
+
+					done();
+			});
+
+	it('Las imágenes están en la rama gh-pages', function (done) {
+
+		for(i = 0; i < datos.convocatorias.length; i++){
+			chai.request(URL).get(datos.convocatorias[i].img).end(function (err, res) {
+				if(err)
+					done(err)
+			});
+		}
+
+		done();
+	});
+
 
 });
