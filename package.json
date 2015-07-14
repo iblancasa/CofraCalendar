@@ -13,14 +13,7 @@
     "chai-fs": "latest",
     "chai-things": "latest",
     "chai-http":"latest",
-    "chai-datetime": "latest",
-    "grunt-gh-pages": "0.9.1",
-    "grunt": "~0.4.2",
-   "grunt-cli": "~0.1.0",
-   "grunt-contrib-clean": "~0.5.0",
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.1"
+    "chai-datetime": "latest"
   },
   "repository": {
   "type": "git",
