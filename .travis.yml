@@ -3,13 +3,12 @@ node_js:
 - '0.10'
 branches:
   only:
-  - gh-pages
-script: npm run deploy
-before_script:
+  - master
+after_success:
   - git config --global user.email "iblancasa@gmail.com"
   - git config --global user.name "Israel Blancas"
   - git remote rm origin
-  - git remote add origin https://user:${GH_TOKEN}@github.com/iblancasa/CofraCalendar.git
+  - git remote add origin https://iblancasa:${GH_TOKEN}@github.com/iblancasa/CofraCalendar.git
   - git add convocatorias.json
   - git commit -m date
   - git push origin gh-pages
