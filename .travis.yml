@@ -1,3 +1,18 @@
 language: node_js
 node_js:
 - '0.10'
+branches:
+  only:
+  - gh-pages
+script: npm run deploy
+before_script:
+  - git config --global user.email "iblancasa@gmail.com"
+  - git config --global user.name "Israel Blancas"
+  - git remote rm origin
+  - git remote add origin https://user:${GH_TOKEN}@github.com/iblancasa/CofraCalendar.git
+  - git add convocatorias.json
+  - git commit -m date
+  - git push origin gh-pages
+env:
+  global:
+    secure: 0LQwEofGk7tWzE82X+wM5JrwT4b/9/aVTY1IcgGcPuNAZSM1kgDAmIOQxWBa54vyk2/wHnP661+sHPQLU+oR0Wii51y7AHnlsFmb7uzJ/KhTYU+7I+AmaUTdTGvrqV304ga4owwyOi4QWwtlh5wvwiSIsSB+Rh9nFjMez8Xx2wONsHmRJt9YWLTrSnzT+K8KgAi9ThcY3cWIAZRoBAlrrWss5kLs5vr9pf7uOecf7LdCbqS0w1DYdODH7pqP+gL4kEWFbhpfXPfZnNPMvaaieY0LLWurkIXSAQhY6XPkrLOVTiO6TJG68TZwsKxd0pD+l5RN8AjmBsGj0jWZdDPyfmhN0fYtQegk76fd6ih5mLGWda/Hx+z63s5FS36AcRyiehaBT3ENqXjPW3e0Phs3/XFH19wVxUWaP51ZPi/2M5EeaejlK4PoKTNZoYtW2EOcVidT1G0tn3F/rEYvOxlvEA3bDYmu8Zhkzui7WgV+wmbm7v/IEVdZohMBnkGTSfpEpHayusppcKOqIlf4wLN1tRsVrGuMY0XSNbtxfXepMHZeItUFFN+Hai0mamRromMdTy5cW5TpiRuuNmSL9JyH2ZeghFM1XE9CtLEdnfFFZ3jfocCx3YP1DMPJ1MKgQRrtFncJvENRa0iquKNb1hPUp4lND+TeaitubavLVLBv0Vo=
