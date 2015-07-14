@@ -8,8 +8,12 @@
     },
   "devDependencies": {
     "mocha": "latest",
-    "chai": "latest",
-    "chai-json-schema": "latest"
+    "chai": "1.6.1",
+    "chai-json-schema": "latest",
+    "chai-fs": "latest",
+    "chai-things": "latest",
+    "chai-http":"latest",
+    "chai-datetime": "latest"
   },
   "repository": {
   "type": "git",
