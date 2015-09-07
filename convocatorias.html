@@ -66,12 +66,11 @@
   </body>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script>
-    var convocatorias;//Todas las convocatorias
+    var convocatorias = new Object;//Todas las convocatorias
+    convocatorias['convocatorias'] = [];
 
-
-    $.getJSON( "http://iblancasa.com/CofraCalendar/convocatorias.json", function( data ) {//Tomar convocatorias antiguas
+    $.getJSON( "http://iblancasa.com/GitEvent/convocatorias.json", function( data ) {//Tomar convocatorias antiguas
        convocatorias=data;
-
 
        var convo;
        var aux = [];
