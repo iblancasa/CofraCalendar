@@ -11,7 +11,7 @@ var fs = require('fs');
 
 var datos;
 var schema;
-var URL = 'http://iblancasa.com/CofraCalendar/';
+var URL = 'http://iblancasa.com/GitEvent/';
 
 
 describe('Lectura de ficheros', function () {

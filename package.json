@@ -1,6 +1,6 @@
 {
-  "name": "CofraCalendar",
-  "description": "Aplicación para convocatorias cofrades en Granada",
+  "name": "GitEvent",
+  "description": "Calendar to use with git",
   "author": "Israel Blancas Álvarez",
   "license": "GPLv3",
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "repository": {
   "type": "git",
-  "url": "https://github.com/iblancasa/CofraCalendar"
+  "url": "https://github.com/iblancasa/GitEvent"
   }
 }
